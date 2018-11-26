@@ -1,0 +1,18 @@
+[build-system]
+requires = ['flit']
+build-backend = 'flit.buildapi'
+
+[tool.flit.metadata]
+dist-name = 'legacy-api-wrap'
+module = 'legacy_api_wrap'
+description-file = 'README.rst'
+author = 'Philipp A.'
+author-email = 'flying-sheep@web.de'
+home-page = 'https://github.com/flying-sheep/legacy-api-wrap'
+requires = [
+    'get-version >=2.0.4',
+    'setuptools',
+]
+classifiers = [#
+    'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+]
