@@ -1,5 +1,8 @@
-Legacy API Wrapper
-==================
+Legacy API Wrapper |travis|
+===========================
+
+.. |travis| image:: https://travis-ci.com/flying-sheep/legacy-api-wrap.svg?branch=master
+   :target: https://travis-ci.com/flying-sheep/legacy-api-wrap
 
 This module defines a decorator to wrap legacy APIs.
 The primary use case is APIs defined before keyword-only parameters.
