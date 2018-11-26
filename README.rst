@@ -1,8 +1,10 @@
-Legacy API Wrapper |travis|
-===========================
+Legacy API Wrapper |b-travis| |b-pypi|
+======================================
 
-.. |travis| image:: https://travis-ci.com/flying-sheep/legacy-api-wrap.svg?branch=master
+.. |b-travis| image:: https://travis-ci.com/flying-sheep/legacy-api-wrap.svg?branch=master
    :target: https://travis-ci.com/flying-sheep/legacy-api-wrap
+.. |b-pypi| image:: https://img.shields.io/pypi/v/legacy-api-wrap.svg
+   :target: https://pypi.org/project/legacy-api-wrap
 
 This module defines a decorator to wrap legacy APIs.
 The primary use case is APIs defined before keyword-only parameters.
