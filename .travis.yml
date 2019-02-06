@@ -14,4 +14,4 @@ script:
   - if [[ $TRAVIS_PYTHON_VERSION != 3.5 ]]; then export BLACK_SWITCH=--black; fi
   - PYTHONPATH=. pytest --cov=legacy_api_wrap $BLACK_SWITCH
   - rst2html.py --halt=2 README.rst >/dev/null
-after_success: coveralls
+after_success: codecov
