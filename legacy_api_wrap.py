@@ -73,6 +73,7 @@ def legacy_api(*old_positionals: Sequence[str]):
                         f"The specified parameters {old_positionals[:len(args_rest)]!r} are no longer positional. "
                         f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
                         DeprecationWarning,
+                        stacklevel=2,
                     )
                     kw = {**kw, **dict(zip(old_positionals, args_rest))}
 

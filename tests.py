@@ -1,4 +1,7 @@
+import warnings
 from inspect import signature
+
+import pytest
 
 from legacy_api_wrap import legacy_api
 
@@ -19,11 +22,16 @@ def test_new_param_available():
 
 
 def test_old_positional_order():
-    from pytest import warns
-
-    with warns(DeprecationWarning):
+    with pytest.deprecated_call():
         res = new(12, 13, 14)
     assert res["d"] == 14
+
+
+def test_warning_stack():
+    with pytest.deprecated_call() as record:
+        new(12, 13, 14)
+    w = record.pop()  # type: warnings.WarningMessage
+    assert w.filename == __file__
 
 
 def test_too_many_args():
