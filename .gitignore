@@ -2,3 +2,6 @@
 /.pytest_cache/
 
 /dist/
+
+# IDEs
+/.idea/

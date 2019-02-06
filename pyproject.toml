@@ -9,12 +9,17 @@ description-file = 'README.rst'
 author = 'Philipp A.'
 author-email = 'flying-sheep@web.de'
 home-page = 'https://github.com/flying-sheep/legacy-api-wrap'
+requires-python = '>=3.5'
 requires = [
     'get-version >=2.0.4',
     'setuptools',
     'future-fstrings',
 ]
-classifiers = [#
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'Programming Language :: Python :: 3',
+    'Topic :: Software Development :: Libraries :: Python Modules',
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
 ]
 

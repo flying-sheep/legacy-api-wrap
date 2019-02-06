@@ -8,10 +8,8 @@ Legacy API Wrapper |b-pypi| |b-travis| |b-codecov|
 .. |b-codecov| image:: https://codecov.io/gh/flying-sheep/legacy-api-wrap/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/flying-sheep/legacy-api-wrap
 
-
-
 This module defines a decorator to wrap legacy APIs.
-The primary use case is APIs defined before keyword-only parameters.
+The primary use case is APIs defined before keyword-only parameters existed.
 
 >>> from legacy_api_wrap import legacy_api
 
