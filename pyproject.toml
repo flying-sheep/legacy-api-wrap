@@ -24,3 +24,6 @@ test = [
     'pytest-cov',
     'pytest-black; python_version != "3.5"',
 ]
+
+[tool.black]
+line-length = 100
