@@ -1,4 +1,3 @@
-# coding: future-fstrings
 """
 Legacy API wrapper.
 
