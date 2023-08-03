@@ -1,5 +1,4 @@
-"""
-Legacy API wrapper.
+"""Legacy API wrapper.
 
 >>> from legacy_api_wrap import legacy_api
 >>> @legacy_api('d', 'c')
@@ -11,12 +10,11 @@ True
 
 
 from functools import wraps
-from inspect import signature, Parameter
-from warnings import warn
+from inspect import Parameter, signature
 from typing import Sequence
+from warnings import warn
 
 from get_version import get_version
-
 
 __version__ = get_version(__file__)
 
@@ -25,8 +23,7 @@ POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
 
 def legacy_api(*old_positionals: Sequence[str]):
-    """
-    Legacy API wrapper.
+    """Legacy API wrapper.
 
     You want to change the API of a function:
 
@@ -64,10 +61,11 @@ def legacy_api(*old_positionals: Sequence[str]):
                 if args_rest:
                     if len(args_rest) > len(old_positionals):
                         n_max = n_positional + len(old_positionals)
-                        raise TypeError(
+                        msg = (
                             f"{fn.__name__}() takes from {n_required} to {n_max} parameters, "
-                            f"but {len(args)+len(args_rest)} were given."
+                            "but {len(args) + len(args_rest)} were given."
                         )
+                        raise TypeError(msg)
                     warn(
                         f"The specified parameters {old_positionals[:len(args_rest)]!r} are "
                         "no longer positional. "
