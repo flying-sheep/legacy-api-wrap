@@ -47,6 +47,9 @@ addopts = [
     '--doctest-glob=*.rst',
 ]
 
+[tool.hatch.version]
+source = 'vcs'
+
 [build-system]
 requires = ['hatchling', 'hatch-vcs', 'hatch-docstring-description']
 build-backend = 'hatchling.build'
