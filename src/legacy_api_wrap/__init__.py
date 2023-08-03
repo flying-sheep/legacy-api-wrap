@@ -14,7 +14,6 @@ from inspect import Parameter, signature
 from typing import Sequence
 from warnings import warn
 
-
 INF = float("inf")
 POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
