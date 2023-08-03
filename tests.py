@@ -1,4 +1,3 @@
-import warnings
 from inspect import signature
 
 import pytest
