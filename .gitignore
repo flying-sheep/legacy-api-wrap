@@ -1,7 +1,4 @@
 /__pycache__/
-/.pytest_cache/
+/*cache/
 
 /dist/
-
-# IDEs
-/.idea/
