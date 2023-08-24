@@ -1,20 +1,20 @@
 module.exports = {
-    plugins: [require.resolve('prettier-plugin-jinja-template')],
+    plugins: [require.resolve("prettier-plugin-jinja-template")],
     overrides: [
         {
-            files: ['.vscode/*.json'],
-            options:{
-                parser: 'json5',
-                quoteProps: 'preserve',
+            files: [".vscode/*.json"],
+            options: {
+                parser: "json5",
+                quoteProps: "preserve",
                 singleQuote: false,
-                trailingComma: 'all',
+                trailingComma: "all",
             },
         },
         {
             files: ["*.html"],
             options: {
-                parser: 'jinja-template',
+                parser: "jinja-template",
             },
         },
-    ]
-}
+    ],
+};
