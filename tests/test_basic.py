@@ -4,7 +4,7 @@ from inspect import signature
 
 import pytest
 
-from src.legacy_api_wrap import legacy_api
+from legacy_api_wrap import legacy_api
 
 
 # def old(a, b=None, d=1, c=2):

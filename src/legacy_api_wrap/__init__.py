@@ -8,17 +8,25 @@
 True
 """
 
+from __future__ import annotations
 
 from functools import wraps
 from inspect import Parameter, signature
-from typing import Sequence
+from typing import TYPE_CHECKING, Callable, TypeVar
 from warnings import warn
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+    from typing import ParamSpec
+
+    P = ParamSpec("P")
+    R = TypeVar("R")
 
 INF = float("inf")
 POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
 
-def legacy_api(*old_positionals: Sequence[str]):
+def legacy_api(*old_positionals: Sequence[str]) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Legacy API wrapper.
 
     You want to change the API of a function:
@@ -43,7 +51,7 @@ def legacy_api(*old_positionals: Sequence[str]):
         The positional parameter names that the old function had after the new function’s ``*``.
     """
 
-    def wrapper(fn):
+    def wrapper(fn: Callable[P, R]) -> Callable[P, R]:
         sig = signature(fn)
         par_types = [p.kind for p in sig.parameters.values()]
         has_var = Parameter.VAR_POSITIONAL in par_types
@@ -51,7 +59,7 @@ def legacy_api(*old_positionals: Sequence[str]):
         n_positional = INF if has_var else sum(1 for p in par_types if p in POS_TYPES)
 
         @wraps(fn)
-        def fn_compatible(*args, **kw):
+        def fn_compatible(*args: P.args, **kw: P.kwargs) -> R:
             if len(args) > n_positional:
                 args, args_rest = args[:n_positional], args[n_positional:]
                 if args_rest:

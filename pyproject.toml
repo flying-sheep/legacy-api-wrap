@@ -1,53 +1,59 @@
 [project]
-dynamic = ['version', 'description']
-name = 'legacy-api-wrap'
-authors = [{ name = 'Philipp A.', email = 'flying-sheep@web.de' }]
-urls.Source = 'https://github.com/flying-sheep/legacy-api-wrap'
-readme = 'README.rst'
-license = 'GPL-3.0-or-later'
-requires-python = '>=3.8'
+dynamic = ["version", "description"]
+name = "legacy-api-wrap"
+authors = [{ name = "Philipp A.", email = "flying-sheep@web.de" }]
+urls.Source = "https://github.com/flying-sheep/legacy-api-wrap"
+readme = "README.rst"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.9"
 classifiers = [
-  'Development Status :: 5 - Production/Stable',
-  'Intended Audience :: Developers',
-  'Programming Language :: Python :: 3',
-  'Topic :: Software Development :: Libraries :: Python Modules',
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = []
-
 [project.optional-dependencies]
-test = ['pytest']
+test = ["pytest"]
 
 [tool.black]
 line-length = 100
 
 [tool.ruff]
 line-length = 100
-select = ['ALL']
+select = ["ALL"]
 ignore = [
-  'D203', # zero instead of one blank lines before class
-  'D213', # multiline summary on first instead of second line
+  "D203", # zero instead of one blank lines before class
+  "D213", # multiline summary on first instead of second line
 ]
-allowed-confusables = ['’']
+allowed-confusables = ["’"]
+[tool.ruff.isort]
+known-first-party = ["legacy_api_wrap"]
 [tool.ruff.extend-per-file-ignores]
-'tests/**/test_*.py' = [
-  'D100',    # tests need no module docstrings
-  'D103',    # tests need no function docstrings
-  'INP001',  # tests should not have __init__.py
-  'PLR2004', # tests use magic values
-  'S101',    # tests use `assert`
+"tests/**/test_*.py" = [
+  "D100",    # tests need no module docstrings
+  "D103",    # tests need no function docstrings
+  "INP001",  # tests should not have __init__.py
+  "PLR2004", # tests use magic values
+  "S101",    # tests use `assert`
 ]
 
 [tool.pytest.ini_options]
 addopts = [
-  '--import-mode=importlib',
-  '--strict-markers',
-  '--doctest-modules',
-  '--doctest-glob=*.rst',
+  "--import-mode=importlib",
+  "--strict-markers",
+  "--doctest-modules",
+  "--doctest-glob=*.rst",
 ]
 
 [tool.hatch.version]
-source = 'vcs'
+source = "vcs"
+
+[tool.hatch.envs.test.scripts]
+run = "pytest {args}"
+[[tool.hatch.envs.test.matrix]]
+python = ["3.9", "3.10", "3.11"]
 
 [build-system]
-requires = ['hatchling', 'hatch-vcs', 'hatch-docstring-description']
-build-backend = 'hatchling.build'
+requires = ["hatchling", "hatch-vcs", "hatch-docstring-description"]
+build-backend = "hatchling.build"
