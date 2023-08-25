@@ -1,10 +1,8 @@
-Legacy API Wrapper |b-pypi| |b-travis| |b-codecov|
-==================================================
+Legacy API Wrapper |b-pypi| |b-codecov|
+=======================================
 
 .. |b-pypi| image:: https://img.shields.io/pypi/v/legacy-api-wrap.svg
    :target: https://pypi.org/project/legacy-api-wrap
-.. |b-travis| image:: https://travis-ci.com/flying-sheep/legacy-api-wrap.svg?branch=master
-   :target: https://travis-ci.com/flying-sheep/legacy-api-wrap
 .. |b-codecov| image:: https://codecov.io/gh/flying-sheep/legacy-api-wrap/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/flying-sheep/legacy-api-wrap
 
