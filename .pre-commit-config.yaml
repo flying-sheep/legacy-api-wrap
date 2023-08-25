@@ -21,3 +21,7 @@ repos:
         additional_dependencies:
           - prettier
           - prettier-plugin-jinja-template
+  - repo: https://github.com/ComPWA/mirrors-taplo
+    rev: v0.8.1
+    hooks:
+      - id: taplo
