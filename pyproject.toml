@@ -54,6 +54,7 @@ addopts = [
 run.data_file = "test-data/coverage"
 xml.output = "test-data/coverage.xml"
 html.directory = "test-data/htmlcov"
+report.exclude_also = ["if TYPE_CHECKING:"]
 
 [tool.hatch.version]
 source = "vcs"
