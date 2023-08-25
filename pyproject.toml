@@ -28,8 +28,10 @@ ignore = [
 ]
 allowed-confusables = ["’"]
 [tool.ruff.isort]
+
 known-first-party = ["legacy_api_wrap"]
 [tool.ruff.extend-per-file-ignores]
+"src/testing/*.py" = ["INP001"]
 "tests/**/test_*.py" = [
   "D100",    # tests need no module docstrings
   "D103",    # tests need no function docstrings
@@ -42,12 +44,16 @@ known-first-party = ["legacy_api_wrap"]
 addopts = [
   "--import-mode=importlib",
   "--strict-markers",
+  "-Werror",
+  "-ptesting.legacy_api_wrap.pytest",
   "--doctest-modules",
   "--doctest-glob=*.rst",
 ]
 
 [tool.hatch.version]
 source = "vcs"
+[tool.hatch.build.targets.wheel]
+packages = ["src/legacy_api_wrap", "src/testing/legacy_api_wrap.py"]
 
 [tool.hatch.envs.test]
 features = ["test"]

@@ -40,7 +40,7 @@ def legacy_api(*old_positionals: Sequence[str]) -> Callable[[Callable[P, R]], Ca
     ... def fn(a, b=None, *, c=2, d=1, e=3):
     ...     return c, d, e
 
-    And the function can be called using one of both signatures.
+    And the function can be called using one of both signatures, raising a warning.
 
     >>> fn(12, 13, 14) == (2, 14, 3)
     True
