@@ -7,7 +7,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: publish
+    environment:
+      name: pypi
+      url: https://pypi.org/project/legacy-api-wrap/
     permissions:
       id-token: write # to authenticate as Trusted Publisher to pypi.org
     steps:
