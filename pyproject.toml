@@ -5,7 +5,7 @@ authors = [{ name = "Philipp A.", email = "flying-sheep@web.de" }]
 urls.Source = "https://github.com/flying-sheep/legacy-api-wrap"
 readme = "README.rst"
 license = "GPL-3.0-or-later"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
@@ -52,7 +52,7 @@ source = "vcs"
 [tool.hatch.envs.test.scripts]
 run = "pytest {args}"
 [[tool.hatch.envs.test.matrix]]
-python = ["3.9", "3.10", "3.11"]
+python = ["3.8", "3.9", "3.10", "3.11"]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs", "hatch-docstring-description"]

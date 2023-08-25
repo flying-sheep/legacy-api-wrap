@@ -31,7 +31,7 @@ def test_old_positional_order() -> None:
 def test_warning_stack() -> None:
     with pytest.deprecated_call() as record:
         new(12, 13, 14)
-    w = record.pop()  # type: warnings.WarningMessage
+    w = record.pop()
     assert w.filename == __file__
 
 
