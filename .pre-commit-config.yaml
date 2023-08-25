@@ -1,4 +1,6 @@
 minimum_pre_commit_version: "2.21.0" # rust version selection
+ci:
+  skip: [taplo]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -26,4 +28,4 @@ repos:
     rev: v0.8.1
     hooks:
       - id: taplo
-        language_version: "1.72.0"
+        language_version: stable
