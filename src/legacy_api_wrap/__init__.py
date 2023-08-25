@@ -16,7 +16,6 @@ from typing import TYPE_CHECKING, Callable, TypeVar
 from warnings import warn
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
     from typing import ParamSpec
 
     P = ParamSpec("P")
@@ -26,7 +25,7 @@ INF = float("inf")
 POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
 
-def legacy_api(*old_positionals: Sequence[str]) -> Callable[[Callable[P, R]], Callable[P, R]]:
+def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Legacy API wrapper.
 
     You want to change the API of a function:
@@ -34,7 +33,9 @@ def legacy_api(*old_positionals: Sequence[str]) -> Callable[[Callable[P, R]], Ca
     >>> def fn(a, b=None, d=1, c=2, e=3):
     ...     return c, d, e
 
-    Add a the decorator and modify the parameters after the ``*``:
+    Add a the decorator, specifying the parameter names that the old function had
+    after the new function’s ``*``.
+    Feel free to reorder the newly keyword-only parameters, and/or to add more.
 
     >>> @legacy_api('d', 'c')
     ... def fn(a, b=None, *, c=2, d=1, e=3):
