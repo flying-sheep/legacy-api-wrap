@@ -67,7 +67,7 @@ def legacy_api(*old_positionals: Sequence[str]) -> Callable[[Callable[P, R]], Ca
                         n_max = n_positional + len(old_positionals)
                         msg = (
                             f"{fn.__name__}() takes from {n_required} to {n_max} parameters, "
-                            "but {len(args) + len(args_rest)} were given."
+                            f"but {len(args) + len(args_rest)} were given."
                         )
                         raise TypeError(msg)
                     warn(
