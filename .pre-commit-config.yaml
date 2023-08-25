@@ -26,4 +26,4 @@ repos:
     rev: v0.8.1
     hooks:
       - id: taplo
-        language_version: stable
+        language_version: "1.72.0"
