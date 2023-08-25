@@ -3,7 +3,7 @@ Legacy API Wrapper |b-pypi| |b-codecov|
 
 .. |b-pypi| image:: https://img.shields.io/pypi/v/legacy-api-wrap.svg
    :target: https://pypi.org/project/legacy-api-wrap
-.. |b-codecov| image:: https://codecov.io/gh/flying-sheep/legacy-api-wrap/branch/master/graph/badge.svg
+.. |b-codecov| image:: https://codecov.io/gh/flying-sheep/legacy-api-wrap/graph/badge.svg
    :target: https://codecov.io/gh/flying-sheep/legacy-api-wrap
 
 This module defines a decorator to wrap legacy APIs.
