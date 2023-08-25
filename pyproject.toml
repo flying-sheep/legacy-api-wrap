@@ -50,10 +50,10 @@ addopts = [
   "--doctest-glob=*.rst",
 ]
 
-[tool.coverage.run]
-data_file = "test-data/coverage"
-[tool.coverage.xml]
-output = "test-data/coverage.xml"
+[tool.coverage]
+run.data_file = "test-data/coverage"
+xml.output = "test-data/coverage.xml"
+html.directory = "test-data/htmlcov"
 
 [tool.hatch.version]
 source = "vcs"
@@ -64,7 +64,7 @@ packages = ["src/legacy_api_wrap", "src/testing/legacy_api_wrap"]
 features = ["test"]
 [tool.hatch.envs.test.scripts]
 run = "pytest {args}"
-cov = "coverage run -m pytest {args} && coverage xml"
+cov = "coverage run -m pytest {args} && coverage report && coverage html"
 [[tool.hatch.envs.test.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11"]
 
