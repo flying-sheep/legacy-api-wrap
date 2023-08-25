@@ -53,7 +53,7 @@ addopts = [
 [tool.hatch.version]
 source = "vcs"
 [tool.hatch.build.targets.wheel]
-packages = ["src/legacy_api_wrap", "src/testing/legacy_api_wrap.py"]
+packages = ["src/legacy_api_wrap", "src/testing/legacy_api_wrap"]
 
 [tool.hatch.envs.test]
 features = ["test"]
