@@ -25,10 +25,11 @@ jobs:
           cache: pip
       - run: |
           pip install -U pip
-          pip install .[test]
+          pip install -e .[test]
       - run: |
           coverage run -m pytest
           coverage xml
+          coverage-rich report
       - uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: true
