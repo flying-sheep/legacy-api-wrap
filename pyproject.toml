@@ -14,7 +14,12 @@ classifiers = [
 ]
 dependencies = []
 [project.optional-dependencies]
-test = ["pytest", "coverage"]
+test = [
+  "pytest",
+  "coverage",
+  "coverage-rich",
+  "toml",          # coverage-rich’s dep anyconfig needs this to load the config
+]
 
 [tool.black]
 line-length = 100
@@ -66,7 +71,7 @@ packages = ["src/legacy_api_wrap", "src/testing/legacy_api_wrap"]
 features = ["test"]
 [tool.hatch.envs.test.scripts]
 run = "pytest {args}"
-cov = "coverage run -m pytest {args} && coverage report && coverage html"
+cov = "coverage run -m pytest {args} && coverage-rich report && coverage html"
 [[tool.hatch.envs.test.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11"]
 
