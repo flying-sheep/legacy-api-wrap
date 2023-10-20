@@ -33,8 +33,8 @@ ignore = [
 ]
 allowed-confusables = ["’"]
 [tool.ruff.isort]
-
 known-first-party = ["legacy_api_wrap"]
+required-imports = ["from __future__ import annotations"]
 [tool.ruff.extend-per-file-ignores]
 "src/testing/*.py" = ["INP001"]
 "tests/**/test_*.py" = [
@@ -44,6 +44,11 @@ known-first-party = ["legacy_api_wrap"]
   "PLR2004", # tests use magic values
   "S101",    # tests use `assert`
 ]
+
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+mypy_path = "src"
 
 [tool.pytest.ini_options]
 addopts = [

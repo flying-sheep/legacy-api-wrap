@@ -1,15 +1,21 @@
 """Pytest plugin for legacy_api_wrap."""
 
+from __future__ import annotations
+
 import sys
 import warnings
+from typing import TYPE_CHECKING
 
 import pytest
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 __all__ = ["_doctest_env", "pytest_itemcollected"]
 
 
 @pytest.fixture()
-def _doctest_env() -> None:
+def _doctest_env() -> Generator[None, None, None]:
     """Pytest fixture to make doctests not error on expected warnings."""
     sys.stderr, stderr_orig = sys.stdout, sys.stderr
     with warnings.catch_warnings():
