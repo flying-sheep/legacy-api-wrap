@@ -10,6 +10,7 @@ True
 
 from __future__ import annotations
 
+import sys
 from functools import wraps
 from inspect import Parameter, signature
 from typing import TYPE_CHECKING, Callable, TypeVar
@@ -25,6 +26,8 @@ INF = float("inf")
 POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
 
+# The actual returned Callable of course accepts more positional parameters,
+# but we want the type to lie so end users don’t rely on the deprecated API.
 def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Legacy API wrapper.
 
@@ -57,30 +60,33 @@ def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, 
         par_types = [p.kind for p in sig.parameters.values()]
         has_var = Parameter.VAR_POSITIONAL in par_types
         n_required = sum(1 for p in sig.parameters.values() if p.default is Parameter.empty)
-        n_positional = INF if has_var else sum(1 for p in par_types if p in POS_TYPES)
+        n_positional = sys.maxsize if has_var else sum(1 for p in par_types if p in POS_TYPES)
 
         @wraps(fn)
-        def fn_compatible(*args: P.args, **kw: P.kwargs) -> R:
-            if len(args) > n_positional:
-                args, args_rest = args[:n_positional], args[n_positional:]
-                if args_rest:
-                    if len(args_rest) > len(old_positionals):
-                        n_max = n_positional + len(old_positionals)
-                        msg = (
-                            f"{fn.__name__}() takes from {n_required} to {n_max} parameters, "
-                            f"but {len(args) + len(args_rest)} were given."
-                        )
-                        raise TypeError(msg)
-                    warn(
-                        f"The specified parameters {old_positionals[:len(args_rest)]!r} are "
-                        "no longer positional. "
-                        f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
-                    kw = {**kw, **dict(zip(old_positionals, args_rest))}
+        def fn_compatible(*args_all: P.args, **kw: P.kwargs) -> R:
+            if len(args_all) <= n_positional:
+                return fn(*args_all, **kw)
 
-            return fn(*args, **kw)
+            args_pos: P.args
+            args_pos, args_rest = args_all[:n_positional], args_all[n_positional:]
+
+            if len(args_rest) > len(old_positionals):
+                n_max = n_positional + len(old_positionals)
+                msg = (
+                    f"{fn.__name__}() takes from {n_required} to {n_max} parameters, "
+                    f"but {len(args_pos) + len(args_rest)} were given."
+                )
+                raise TypeError(msg)
+            warn(
+                f"The specified parameters {old_positionals[:len(args_rest)]!r} are "
+                "no longer positional. "
+                f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            kw_new: P.kwargs = {**kw, **dict(zip(old_positionals, args_rest))}
+
+            return fn(*args_pos, **kw_new)
 
         return fn_compatible
 

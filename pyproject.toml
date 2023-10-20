@@ -45,6 +45,11 @@ known-first-party = ["legacy_api_wrap"]
   "S101",    # tests use `assert`
 ]
 
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+mypy_path = "src"
+
 [tool.pytest.ini_options]
 addopts = [
   "--import-mode=importlib",
