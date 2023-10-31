@@ -21,9 +21,6 @@ test = [
   "toml",          # coverage-rich’s dep anyconfig needs this to load the config
 ]
 
-[tool.black]
-line-length = 100
-
 [tool.ruff]
 line-length = 100
 select = ["ALL"]
