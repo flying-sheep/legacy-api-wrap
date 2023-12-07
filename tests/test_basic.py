@@ -41,3 +41,12 @@ def test_too_many_args() -> None:
         match=r"new\(\) takes from 1 to 4 parameters, but 5 were given\.",
     ):
         new(1, 2, 3, 4, 5)  # type: ignore[misc]
+
+
+def test_customize() -> None:
+    @legacy_api("a", category=FutureWarning)
+    def new(*, a: int) -> int:
+        return a
+
+    with pytest.raises(FutureWarning):
+        new(1)
