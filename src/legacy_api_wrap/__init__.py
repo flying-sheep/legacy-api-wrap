@@ -29,7 +29,11 @@ POS_TYPES = {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}
 
 # The actual returned Callable of course accepts more positional parameters,
 # but we want the type to lie so end users don’t rely on the deprecated API.
-def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, R]]:
+def legacy_api(
+    *old_positionals: str,
+    category: type[Warning] = DeprecationWarning,
+    stacklevel: int = 2,
+) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Legacy API wrapper.
 
     You want to change the API of a function:
@@ -54,6 +58,13 @@ def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, 
     ----------
     old_positionals
         The positional parameter names that the old function had after the new function’s ``*``.
+    category
+        The warning class to use for the deprecation.
+        Typically, you want to use ``DeprecationWarning``, ``PendingDeprecationWarning``,
+        ``FutureWarning``, or a custom subclass of those.
+    stacklevel
+        The stacklevel to use for the deprecation warning.
+        By default, the first stack frame is the call site of the wrapped function.
     """
 
     def wrapper(fn: Callable[P, R]) -> Callable[P, R]:
@@ -82,8 +93,8 @@ def legacy_api(*old_positionals: str) -> Callable[[Callable[P, R]], Callable[P, 
                 f"The specified parameters {old_positionals[:len(args_rest)]!r} are "
                 "no longer positional. "
                 f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
-                DeprecationWarning,
-                stacklevel=2,
+                category=category,
+                stacklevel=stacklevel,
             )
             kw_new: P.kwargs = {**kw, **dict(zip(old_positionals, args_rest))}
 
