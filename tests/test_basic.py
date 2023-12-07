@@ -49,4 +49,4 @@ def test_customize() -> None:
         return a
 
     with pytest.raises(FutureWarning):
-        new(1)
+        new(1)  # type: ignore[misc]
