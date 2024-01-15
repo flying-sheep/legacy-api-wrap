@@ -11,6 +11,7 @@ classifiers = [
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
   "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
 ]
 dependencies = []
 [project.optional-dependencies]
@@ -18,7 +19,7 @@ test = [
   "pytest",
   "coverage",
   "coverage-rich",
-  "toml",          # coverage-rich’s dep anyconfig needs this to load the config
+  "anyconfig[toml] >=0.14", # coverage-rich uses anyconfig
 ]
 
 [tool.ruff]
