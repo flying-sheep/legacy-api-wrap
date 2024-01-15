@@ -18,7 +18,7 @@ test = [
   "pytest",
   "coverage",
   "coverage-rich",
-  "toml",          # coverage-rich’s dep anyconfig needs this to load the config
+  "anyconfig[toml] >=0.14", # coverage-rich uses anyconfig
 ]
 
 [tool.ruff]
