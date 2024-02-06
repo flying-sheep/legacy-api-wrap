@@ -11,7 +11,7 @@ import pytest
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-__all__ = ["_doctest_env", "pytest_itemcollected"]
+__all__ = ["_modify_env", "_doctest_env"]
 
 
 @pytest.fixture()
@@ -25,10 +25,8 @@ def _doctest_env() -> Generator[None, None, None]:
     sys.stderr = stderr_orig
 
 
-def pytest_itemcollected(item: pytest.Item) -> None:
-    """Modify test items.
-
-    See https://docs.pytest.org/en/7.1.x/reference/reference.html#pytest.hookspec.pytest_itemcollected
-    """
-    if isinstance(item, pytest.DoctestItem):
-        item.add_marker(pytest.mark.usefixtures("_doctest_env"))
+@pytest.fixture(autouse=True)
+def _modify_env(request: pytest.FixtureRequest) -> None:
+    """Autorun fixture that conditionally modifies the test environment."""
+    if isinstance(request.node, pytest.DoctestItem):
+        request.getfixturevalue("_doctest_env")

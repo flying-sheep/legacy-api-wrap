@@ -65,6 +65,7 @@ def legacy_api(
     stacklevel
         The stacklevel to use for the deprecation warning.
         By default, the first stack frame is the call site of the wrapped function.
+
     """
 
     def wrapper(fn: Callable[P, R]) -> Callable[P, R]:
