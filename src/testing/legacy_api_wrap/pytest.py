@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 __all__ = ["_modify_env", "_doctest_env"]
 
 
-@pytest.fixture()
+@pytest.fixture
 def _doctest_env() -> Generator[None, None, None]:
     """Pytest fixture to make doctests not error on expected warnings."""
     sys.stderr, stderr_orig = sys.stdout, sys.stderr
