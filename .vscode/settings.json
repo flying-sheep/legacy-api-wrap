@@ -14,4 +14,8 @@
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "tamasfe.even-better-toml",
     },
+    "[json][jsonc]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "biomejs.biome",
+    },
 }
