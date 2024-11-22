@@ -10,8 +10,8 @@
             "source.organizeImports": "always",
         },
     },
-    "[toml]": {
+    "[json][jsonc]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "tamasfe.even-better-toml",
+        "editor.defaultFormatter": "biomejs.biome",
     },
 }

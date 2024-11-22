@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MPL-2.0
 """Pytest plugin for legacy_api_wrap."""
 
 from __future__ import annotations

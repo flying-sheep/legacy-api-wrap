@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MPL-2.0
 """Legacy API wrapper.
 
 >>> from legacy_api_wrap import legacy_api
