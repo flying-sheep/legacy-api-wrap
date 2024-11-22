@@ -46,22 +46,25 @@ python = [ "3.8", "3.9", "3.10", "3.11" ]
 
 [tool.ruff]
 line-length = 100
-select = [ "ALL" ]
-ignore = [
-  "D203", # zero instead of one blank lines before class
-  "D213", # multiline summary on first instead of second line
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "COM812", # incompatible with formatter
+  "D203",   # zero instead of one blank lines before class
+  "D213",   # multiline summary on first instead of second line
+  "ISC001", # incompatible with formatter
 ]
-allowed-confusables = [ "’" ]
-extend-per-file-ignores."src/testing/*.py" = [ "INP001" ]
-extend-per-file-ignores."tests/**/test_*.py" = [
+lint.extend-per-file-ignores."src/testing/*.py" = [ "INP001" ]
+lint.extend-per-file-ignores."tests/**/test_*.py" = [
   "D100",    # tests need no module docstrings
   "D103",    # tests need no function docstrings
   "INP001",  # tests should not have __init__.py
   "PLR2004", # tests use magic values
   "S101",    # tests use `assert`
 ]
-isort.known-first-party = [ "legacy_api_wrap" ]
-isort.required-imports = [ "from __future__ import annotations" ]
+lint.allowed-confusables = [ "’" ]
+lint.flake8-copyright.notice-rgx = "SPDX-License-Identifier: MPL-2\\.0"
+lint.isort.known-first-party = [ "legacy_api_wrap" ]
+lint.isort.required-imports = [ "from __future__ import annotations" ]
 
 [tool.pytest.ini_options]
 addopts = [
