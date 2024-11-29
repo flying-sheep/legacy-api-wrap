@@ -12,7 +12,7 @@ import pytest
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-__all__ = ["_modify_env", "_doctest_env"]
+__all__ = ["_doctest_env", "_modify_env"]
 
 
 @pytest.fixture
