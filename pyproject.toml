@@ -45,7 +45,7 @@ scripts.run-cov = "coverage run -m pytest{env:HATCH_TEST_ARGS:} {args}"
 scripts.cov-combine = "coverage combine"
 scripts.cov-report = "coverage-rich report"
 [[tool.hatch.envs.test.matrix]]
-python = [ "3.8", "3.9", "3.10", "3.11" ]
+python = [ "3.8", "3.13" ]
 
 [tool.ruff]
 line-length = 100
