@@ -10,6 +10,7 @@ on:
 
 env:
   PYTEST_ADDOPTS: "-v --color=yes"
+  FORCE_COLOR: "1"
 
 jobs:
   build:
