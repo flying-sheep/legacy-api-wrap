@@ -81,7 +81,6 @@ def legacy_api(
             if len(args_all) <= n_positional:
                 return fn(*args_all, **kw)
 
-            args_pos: P.args
             args_pos, args_rest = args_all[:n_positional], args_all[n_positional:]
 
             if len(args_rest) > len(old_positionals):
@@ -98,9 +97,9 @@ def legacy_api(
                 category=category,
                 stacklevel=stacklevel,
             )
-            kw_new: P.kwargs = {**kw, **dict(zip(old_positionals, args_rest))}
+            kw_new = {**kw, **dict(zip(old_positionals, args_rest))}
 
-            return fn(*args_pos, **kw_new)
+            return fn(*args_pos, **kw_new)  # type: ignore[arg-type]
 
         return fn_compatible
 
