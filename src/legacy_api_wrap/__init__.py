@@ -102,7 +102,11 @@ def legacy_api(
                 f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
                 category=category,
                 stacklevel=stacklevel,
-                **({"skip_file_prefixes": skip_file_prefixes} if sys.version_info >= (3, 12) else {})
+                **(
+                    {"skip_file_prefixes": skip_file_prefixes}
+                    if sys.version_info >= (3, 12)
+                    else {}
+                ),
             )
             kw_new = {**kw, **dict(zip(old_positionals, args_rest))}
 
