@@ -74,8 +74,6 @@ def legacy_api(
     """
 
     def wrapper(fn: Callable[P, R]) -> Callable[P, R]:
-        __tracebackhide__ = True
-
         sig = signature(fn)
         par_types = [p.kind for p in sig.parameters.values()]
         has_var = Parameter.VAR_POSITIONAL in par_types
@@ -84,6 +82,8 @@ def legacy_api(
 
         @wraps(fn)
         def fn_compatible(*args_all: P.args, **kw: P.kwargs) -> R:
+            __tracebackhide__ = True
+
             if len(args_all) <= n_positional:
                 return fn(*args_all, **kw)
 
