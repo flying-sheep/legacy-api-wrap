@@ -27,7 +27,7 @@ jobs:
             | map(select(.key | startswith("hatch-test")) | { name: .key, python: .value.python })')
           echo "envs=${ENVS_JSON}" | tee $GITHUB_OUTPUT
 
-  build:
+  test:
     needs: [get-environments]
     runs-on: ubuntu-latest
     strategy:
@@ -50,11 +50,12 @@ jobs:
           files: test-data/coverage.xml
           flags: ${{ matrix.env.name }}
           token: 872498ea-6ef6-4f1d-8006-bc6e557580f6
+
   check:
     if: always()
     needs:
       - get-environments
-      - build
+      - test
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1
