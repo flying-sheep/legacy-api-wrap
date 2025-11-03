@@ -34,6 +34,7 @@ def legacy_api(
     *old_positionals: str,
     category: type[Warning] = DeprecationWarning,
     stacklevel: int = 2,
+    skip_file_prefixes: tuple[str, ...] = (),
 ) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Legacy API wrapper.
 
@@ -66,6 +67,9 @@ def legacy_api(
     stacklevel
         The stacklevel to use for the deprecation warning.
         By default, the first stack frame is the call site of the wrapped function.
+    skip_file_prefixes
+        A sequence of file path prefixes to skip when determining the stacklevel.
+        Supported since Python 3.12. See :func:`warnings.warn` documentation.
 
     """
 
@@ -78,6 +82,8 @@ def legacy_api(
 
         @wraps(fn)
         def fn_compatible(*args_all: P.args, **kw: P.kwargs) -> R:
+            __tracebackhide__ = True
+
             if len(args_all) <= n_positional:
                 return fn(*args_all, **kw)
 
@@ -96,6 +102,11 @@ def legacy_api(
                 f"Please specify them like `{old_positionals[0]}={args_rest[0]!r}`",
                 category=category,
                 stacklevel=stacklevel,
+                **(
+                    {"skip_file_prefixes": skip_file_prefixes}
+                    if sys.version_info >= (3, 12)
+                    else {}
+                ),
             )
             kw_new = {**kw, **dict(zip(old_positionals, args_rest))}
 
