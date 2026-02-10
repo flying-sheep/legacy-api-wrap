@@ -7,12 +7,11 @@ name = "legacy-api-wrap"
 readme = "README.rst"
 license = "MPL-2.0"
 authors = [ { name = "Philipp A.", email = "flying-sheep@web.de" } ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -41,7 +40,7 @@ envs.hatch-test.scripts.run = "pytest{env:HATCH_TEST_ARGS:} {args}"
 envs.hatch-test.scripts.run-cov = "coverage run -m pytest{env:HATCH_TEST_ARGS:} {args}"
 envs.hatch-test.scripts.cov-combine = "coverage combine"
 envs.hatch-test.scripts.cov-report = "coverage-rich report"
-envs.hatch-test.matrix = [ { python = [ "3.14", "3.9" ] } ]
+envs.hatch-test.matrix = [ { python = [ "3.14", "3.10" ] } ]
 metadata.hooks.docstring-description = {}
 version.source = "vcs"
 
