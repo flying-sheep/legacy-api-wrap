@@ -71,10 +71,12 @@ lint.isort.required-imports = [ "from __future__ import annotations" ]
 strict = true
 addopts = [
   "--import-mode=importlib",
-  "-Werror",
   "-ptesting.legacy_api_wrap.pytest",
   "--doctest-modules",
   "--doctest-glob=*.rst",
+]
+filterwarnings = [
+  "error",
 ]
 
 [tool.coverage]
