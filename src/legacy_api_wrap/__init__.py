@@ -108,7 +108,7 @@ def legacy_api(
                     else {}
                 ),
             )
-            kw_new = {**kw, **dict(zip(old_positionals, args_rest))}
+            kw_new = {**kw, **dict(zip(old_positionals, args_rest, strict=False))}
 
             return fn(*args_pos, **kw_new)  # type: ignore[arg-type]
 
