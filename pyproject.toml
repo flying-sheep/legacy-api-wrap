@@ -66,6 +66,11 @@ lint.flake8-copyright.notice-rgx = "SPDX-License-Identifier: MPL-2\\.0"
 lint.isort.known-first-party = [ "legacy_api_wrap" ]
 lint.isort.required-imports = [ "from __future__ import annotations" ]
 
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+mypy_path = "src"
+
 [tool.pytest]
 strict = true
 addopts = [
@@ -84,8 +89,3 @@ run.omit = [ "src/testing/*", "tests/*" ]
 report.exclude_also = [ "if TYPE_CHECKING:" ]
 html.directory = "test-data/htmlcov"
 xml.output = "test-data/coverage.xml"
-
-[tool.mypy]
-strict = true
-explicit_package_bases = true
-mypy_path = "src"
