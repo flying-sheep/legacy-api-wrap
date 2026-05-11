@@ -84,7 +84,7 @@ filterwarnings = [
 ]
 
 [tool.coverage]
-run.data_file = "test-data/coverage"
+run.data_file = "test-data/_coverage"
 run.omit = [ "src/testing/*", "tests/*" ]
 report.exclude_also = [ "if TYPE_CHECKING:" ]
 html.directory = "test-data/htmlcov"
