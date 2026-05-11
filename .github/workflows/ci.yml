@@ -18,9 +18,9 @@ jobs:
     outputs:
       envs: ${{ steps.get-envs.outputs.envs }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with: { filter: blob:none, fetch-depth: 0 }
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.1.0
       - id: get-envs
         run: |
           ENVS_JSON=$(NO_COLOR=1 uvx hatch env show --json | jq -c 'to_entries
@@ -34,17 +34,17 @@ jobs:
       matrix:
         env: ${{ fromJSON(needs.get-environments.outputs.envs) }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.env.python }}
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.1.0
       - run: uv pip install --system -e .[test]
       - run: |
           coverage run -m pytest
           coverage xml
           coverage-rich report
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         with:
           fail_ci_if_error: true
           files: test-data/coverage.xml
