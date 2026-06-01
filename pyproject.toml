@@ -32,17 +32,17 @@ optional-dependencies.test = [
 urls.Source = "https://github.com/flying-sheep/legacy-api-wrap"
 
 [tool.hatch]
+version.source = "vcs"
+metadata.hooks.docstring-description = {}
 build.targets.wheel.packages = [ "src/legacy_api_wrap", "src/testing/legacy_api_wrap" ]
-envs.hatch-test.default-args = []
 envs.hatch-test.features = [ "test" ]
 envs.hatch-test.extra-dependencies = [ "ipython" ]
-envs.hatch-test.scripts.run = "pytest{env:HATCH_TEST_ARGS:} {args}"
-envs.hatch-test.scripts.run-cov = "coverage run -m pytest{env:HATCH_TEST_ARGS:} {args}"
 envs.hatch-test.scripts.cov-combine = "coverage combine"
 envs.hatch-test.scripts.cov-report = "coverage-rich report"
+envs.hatch-test.scripts.run = "pytest{env:HATCH_TEST_ARGS:} {args}"
+envs.hatch-test.scripts.run-cov = "coverage run -m pytest{env:HATCH_TEST_ARGS:} {args}"
 envs.hatch-test.matrix = [ { python = [ "3.14", "3.10" ] } ]
-metadata.hooks.docstring-description = {}
-version.source = "vcs"
+envs.hatch-test.default-args = []
 
 [tool.ruff]
 line-length = 100
@@ -67,12 +67,11 @@ lint.isort.known-first-party = [ "legacy_api_wrap" ]
 lint.isort.required-imports = [ "from __future__ import annotations" ]
 
 [tool.mypy]
-strict = true
-explicit_package_bases = true
 mypy_path = "src"
+explicit_package_bases = true
+strict = true
 
 [tool.pytest]
-strict = true
 addopts = [
   "--import-mode=importlib",
   "-ptesting.legacy_api_wrap.pytest",
@@ -82,6 +81,7 @@ addopts = [
 filterwarnings = [
   "error",
 ]
+strict = true
 
 [tool.coverage]
 run.data_file = "test-data/_coverage"
