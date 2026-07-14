@@ -25,13 +25,13 @@ def test_new_param_available() -> None:
 
 def test_old_positional_order() -> None:
     with pytest.deprecated_call():
-        res = new(12, 13, 14)  # type: ignore[misc]
+        res = new(12, 13, 14)  # type: ignore[call-arg]
     assert res["d"] == 14
 
 
 def test_warning_stack() -> None:
     with pytest.deprecated_call() as record:
-        new(12, 13, 14)  # type: ignore[misc]
+        new(12, 13, 14)  # type: ignore[call-arg]
     w = record.pop()
     assert w.filename == __file__
 
@@ -41,7 +41,7 @@ def test_too_many_args() -> None:
         TypeError,
         match=r"new\(\) takes from 1 to 4 parameters, but 5 were given\.",
     ):
-        new(1, 2, 3, 4, 5)  # type: ignore[misc]
+        new(1, 2, 3, 4, 5)  # type: ignore[call-arg]
 
 
 def test_customize() -> None:
@@ -50,4 +50,4 @@ def test_customize() -> None:
         return a
 
     with pytest.raises(FutureWarning):
-        new(1)  # type: ignore[misc]
+        new(1)  # type: ignore[call-arg]
