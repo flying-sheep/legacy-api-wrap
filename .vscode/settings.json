@@ -10,7 +10,7 @@
             "source.organizeImports": "always",
         },
     },
-    "[json][jsonc]": {
+    "[json][jsonc][yaml]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "biomejs.biome",
     },
